@@ -1,0 +1,5 @@
+ARG_ENABLE('arc_booster', 'arc_booster support', 'no');
+
+if (PHP_ARC_BOOSTER != 'no') {
+	EXTENSION('arc_booster', 'arc_booster.c', null, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
+}

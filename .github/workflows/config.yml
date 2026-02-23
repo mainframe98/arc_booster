@@ -1,0 +1,70 @@
+name: Build and Test
+on:
+  pull_request:
+  push:
+    # Trigger on all branches, but not on tags, to prevent CI runs if a release is published (which pushes a tag)
+    branches: ['**']
+
+jobs:
+  # Build and test on Linux
+  ubuntu:
+    strategy:
+      matrix:
+        version: ["8.3", "8.4", "8.5", "8.6", "8.7"]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{matrix.version}}
+          extensions: ctype, curl, mbstring, tokenizer
+      - name: phpize
+        run: phpize
+      - name: configure
+        run: |
+          EXTRA_CFLAGS='-Wall -Wextra -Wno-unused-parameter' ./configure
+      - name: make
+        run: make
+      - name: test
+        run: |
+          make test TESTS="--show-diff tests"
+      - name: Checkout Arcanist
+        uses: actions/checkout@v7
+        with:
+          repository: 'phorge-it/arcanist'
+          ref: 'master'
+      - name: Arcanist unit tests
+        run: |
+          php -dextension=modules/arc_booster.so arcanist/scripts/arcanist.php unit --no-coverage --everything --
+
+  # Build and test on Windows
+  windows:
+    strategy:
+      matrix:
+        php-version: ["8.3", "8.4", "8.5"]
+        arch: [x64, x86]
+        ts: [nts, ts]
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      # The builder handles building, testing and artifact packaging/upload automatically
+      - name: Build and test the extension
+        uses: php/php-windows-builder/extension@v1
+        with:
+          php-version: ${{ matrix.php-version }}
+          arch: ${{ matrix.arch }}
+          ts: ${{ matrix.ts }}
+          run-tests: true
+          test-runner-args: "--show-diff tests"
+      - name: Checkout Arcanist
+        uses: actions/checkout@v7
+        with:
+          repository: 'phorge-it/arcanist'
+          ref: 'master'
+      - name: Arcanist unit tests
+        working-directory: 'arcanist/'
+        run: |
+          php -dextension=artifacts/php_arc_booster.dll arcanist/scripts/arcanist.php unit --no-coverage --everything --
