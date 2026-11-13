@@ -37,8 +37,9 @@ jobs:
           ref: 'master'
           path: 'arcanist'
       - name: Arcanist unit tests
+        working-directory: 'arcanist/'
         run: |
-          php -dextension=modules/arc_booster.so arcanist/scripts/arcanist.php unit --no-coverage --everything --
+          php -dextension=../modules/arc_booster.so scripts/arcanist.php unit --no-coverage --everything --
 
   # Build and test on Windows
   windows:
@@ -69,4 +70,4 @@ jobs:
       - name: Arcanist unit tests
         working-directory: 'arcanist/'
         run: |
-          php -dextension=artifacts/php_arc_booster.dll arcanist/scripts/arcanist.php unit --no-coverage --everything --
+          php -dextension=../artifacts/php_arc_booster.dll scripts/arcanist.php unit --no-coverage --everything --
