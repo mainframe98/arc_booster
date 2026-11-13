@@ -24,6 +24,8 @@ static zend_always_inline bool zend_ast_is_decl(zend_ast *ast) {
 }
 #endif
 
+static void (*original_zend_ast_process)(zend_ast *ast);
+
 /**
  * Fetch a value from a HashTable for a given index.
  * This function does not add to the retrieved value's refcount.

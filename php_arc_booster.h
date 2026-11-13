@@ -38,8 +38,6 @@ ZEND_TSRMLS_CACHE_DEFINE()
 # endif
 #endif
 
-ZEND_API void (*original_zend_ast_process)(zend_ast *ast);
-
 #define ARC_BOOSTER_G(v) ZEND_MODULE_GLOBALS_ACCESSOR(arc_booster, v)
 
 #endif	/* PHP_ARC_BOOSTER_H */
