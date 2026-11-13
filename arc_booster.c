@@ -93,7 +93,7 @@ typedef struct {
 	char *original_function_name;
 	char *replacement_name;
 	enum ARC_BOOSTER_REPLACEMENT_TYPE replacement_type;
-	uint arg_count;
+	uint32_t arg_count;
 	bool arg_count_is_minimum;
 } arc_booster_replacement;
 
