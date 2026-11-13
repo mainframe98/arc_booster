@@ -33,7 +33,7 @@ jobs:
       - name: Checkout Arcanist
         uses: actions/checkout@v7
         with:
-          repository: 'phorge-it/arcanist'
+          repository: 'phorgeit/arcanist'
           ref: 'master'
       - name: Arcanist unit tests
         run: |
@@ -62,7 +62,7 @@ jobs:
       - name: Checkout Arcanist
         uses: actions/checkout@v7
         with:
-          repository: 'phorge-it/arcanist'
+          repository: 'phorgeit/arcanist'
           ref: 'master'
       - name: Arcanist unit tests
         working-directory: 'arcanist/'
