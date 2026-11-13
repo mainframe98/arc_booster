@@ -13,7 +13,7 @@ Arc Booster is a PHP extension aiming to speed up performance of Arcanist, and b
 
 ## Requirements
 
-* PHP 8.3 or newer.
+* PHP 8.4 or newer.
 * A reasonably modern release of Arcanist/Phorge.
 
 ### Optional
