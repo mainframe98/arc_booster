@@ -47,5 +47,6 @@ tmp-php.ini
 *~
 /cmake-*
 /run-php
+x64/
 
 .idea/
