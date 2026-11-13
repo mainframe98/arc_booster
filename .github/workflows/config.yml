@@ -35,6 +35,7 @@ jobs:
         with:
           repository: 'phorgeit/arcanist'
           ref: 'master'
+          path: 'arcanist'
       - name: Arcanist unit tests
         run: |
           php -dextension=modules/arc_booster.so arcanist/scripts/arcanist.php unit --no-coverage --everything --
@@ -64,6 +65,7 @@ jobs:
         with:
           repository: 'phorgeit/arcanist'
           ref: 'master'
+          path: 'arcanist'
       - name: Arcanist unit tests
         working-directory: 'arcanist/'
         run: |
