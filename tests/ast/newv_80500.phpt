@@ -69,6 +69,7 @@ namespace {
         new \Test(foo: 'bar');
         new \Test(...[$class => 'bar']);
         new \Test(...$args);
+        new substr($class, 7)();
     }
 
     echo ArcBooster\render_ast(file_get_contents(__FILE__));

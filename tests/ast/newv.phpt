@@ -35,6 +35,7 @@ namespace {
     \newv('Test', array('foo' => 'bar'));
     \newv('Test', array($class => 'bar'));
     \newv('Test', $args);
+    \newv(substr($class, 7), array());
   }
 
   echo ArcBooster\render_ast(file_get_contents(__FILE__));
@@ -65,8 +66,10 @@ namespace {
         new \Test(1);
         new \Test(1, 2, 3);
         new \Test(1, 2, 3, 4);
+        new \Test(foo: 'bar');
         new \Test(...[$class => 'bar']);
         new \Test(...$args);
+        new (substr($class, 7))();
     }
 
     echo ArcBooster\render_ast(file_get_contents(__FILE__));
