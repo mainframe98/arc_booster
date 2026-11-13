@@ -1,5 +1,11 @@
 --TEST--
 Compile-time evaluation
+--SKIPIF--
+<?php
+if (PHP_VERSION_ID >= 80500 && PHP_VERSION_ID < 80600) {
+  die("skip Not for PHP 8.5");
+}
+?>
 --EXTENSIONS--
 arc_booster
 opcache
