@@ -2,8 +2,8 @@
 Compile-time evaluation
 --SKIPIF--
 <?php
-if (PHP_VERSION_ID < 80500 || PHP_VERSION_ID >= 80600) {
-  die("skip PHP 8.5 only");
+if (PHP_VERSION_ID >= 80600) {
+  die("skip PHP 8.5 and older");
 }
 ?>
 --EXTENSIONS--
