@@ -13,8 +13,8 @@
 #include "zend_smart_str.h"
 
 PHP_INI_BEGIN()
-	STD_ZEND_INI_BOOLEAN("arc_booster.disable_ast_modifications", "0", PHP_INI_PERDIR, OnUpdateBool, disable_ast_mod, zend_arc_booster_globals, arc_booster_globals)
-	STD_ZEND_INI_BOOLEAN("arc_booster.use_mbstring", "1", PHP_INI_PERDIR, OnUpdateBool, use_mbstring, zend_arc_booster_globals, arc_booster_globals)
+	STD_ZEND_INI_BOOLEAN("arc_booster.disable_ast_modifications", "0", PHP_INI_SYSTEM|PHP_INI_PERDIR, OnUpdateBool, disable_ast_mod, zend_arc_booster_globals, arc_booster_globals)
+	STD_ZEND_INI_BOOLEAN("arc_booster.use_mbstring", "1", PHP_INI_SYSTEM|PHP_INI_PERDIR, OnUpdateBool, use_mbstring, zend_arc_booster_globals, arc_booster_globals)
 PHP_INI_END()
 
 // zend_ast_is_decl was introduced in PHP 8.5.
