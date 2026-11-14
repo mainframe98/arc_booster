@@ -17,6 +17,11 @@ PHP_INI_BEGIN()
 	STD_ZEND_INI_BOOLEAN("arc_booster.use_mbstring", "1", PHP_INI_SYSTEM|PHP_INI_PERDIR, OnUpdateBool, use_mbstring, zend_arc_booster_globals, arc_booster_globals)
 PHP_INI_END()
 
+static void arc_booster_init_globals(zend_arc_booster_globals *abg) {
+	abg->disable_ast_mod = false;
+	abg->use_mbstring = true;
+}
+
 // zend_ast_is_decl was introduced in PHP 8.5.
 #if PHP_VERSION_ID < 80500
 static zend_always_inline bool zend_ast_is_decl(zend_ast *ast) {
@@ -2344,6 +2349,8 @@ PHP_MINIT_FUNCTION(arc_booster) {
 #if defined(COMPILE_DL_ARC_BOOSTER) && defined(ZTS)
 	ZEND_TSRMLS_CACHE_UPDATE();
 #endif
+
+	ZEND_INIT_MODULE_GLOBALS(arc_booster, arc_booster_init_globals, NULL);
 
 	REGISTER_INI_ENTRIES();
 
