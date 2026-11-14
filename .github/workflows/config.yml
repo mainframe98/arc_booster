@@ -11,6 +11,7 @@ jobs:
     strategy:
       matrix:
         version: ["8.4", "8.5", "8.6", "8.7"]
+        ts: [nts, ts]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,6 +21,8 @@ jobs:
         with:
           php-version: ${{matrix.version}}
           extensions: ctype, curl, mbstring, tokenizer
+        env:
+          phpts: ${{matrix.ts}}
       - name: phpize
         run: phpize
       - name: configure
