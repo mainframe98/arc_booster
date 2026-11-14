@@ -5,12 +5,6 @@
 #include "TSRM.h"
 #endif
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
-
-#include "php.h"
-
 extern zend_module_entry arc_booster_module_entry;
 #define phpext_arc_booster_ptr &arc_booster_module_entry
 
@@ -29,13 +23,8 @@ ZEND_BEGIN_MODULE_GLOBALS(arc_booster)
 	bool use_mbstring;
 ZEND_END_MODULE_GLOBALS(arc_booster)
 
-ZEND_DECLARE_MODULE_GLOBALS(arc_booster)
-
-#ifdef COMPILE_DL_ARC_BOOSTER
-ZEND_GET_MODULE(arc_booster)
-# ifdef ZTS
-ZEND_TSRMLS_CACHE_DEFINE()
-# endif
+#if defined(COMPILE_DL_ARC_BOOSTER) && defined(ZTS)
+ZEND_TSRMLS_CACHE_EXTERN();
 #endif
 
 #define ARC_BOOSTER_G(v) ZEND_MODULE_GLOBALS_ACCESSOR(arc_booster, v)

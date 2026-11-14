@@ -1,3 +1,8 @@
+#ifdef HAVE_CONFIG_H
+# include <config.h>
+#endif
+
+#include "php.h"
 #include "php_arc_booster.h"
 #include "arc_booster_arginfo.h"
 #include "php_ini.h"
@@ -11,6 +16,8 @@
 #include "zend_language_scanner_defs.h"
 #include "zend_portability.h"
 #include "zend_smart_str.h"
+
+ZEND_DECLARE_MODULE_GLOBALS(arc_booster)
 
 PHP_INI_BEGIN()
 	STD_ZEND_INI_BOOLEAN("arc_booster.disable_ast_modifications", "0", PHP_INI_SYSTEM|PHP_INI_PERDIR, OnUpdateBool, disable_ast_mod, zend_arc_booster_globals, arc_booster_globals)
@@ -2405,3 +2412,10 @@ zend_module_entry arc_booster_module_entry = {
 	PHP_ARC_BOOSTER_VERSION,
 	STANDARD_MODULE_PROPERTIES
 };
+
+#ifdef COMPILE_DL_ARC_BOOSTER
+#ifdef ZTS
+ZEND_TSRMLS_CACHE_DEFINE();
+#endif
+ZEND_GET_MODULE(arc_booster)
+#endif
