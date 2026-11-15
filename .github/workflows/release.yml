@@ -2,12 +2,15 @@
 # It builds and publishes zip-files with prebuilt Windows DLLs as release artifacts. These
 # artifacts are required by PIE (PHP Installer for Extensions). See https://github.com/php/pie
 # and https://github.com/php/php-windows-builder for more information.
-name: Release
+name: Release Windows build
 
 on:
   # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#release
   release:
     types: [published]
+
+permissions:
+  contents: write
 
 jobs:
   # Build and test on Windows

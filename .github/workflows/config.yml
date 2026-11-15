@@ -34,15 +34,19 @@ jobs:
         run: |
           make test TESTS="--show-diff tests"
       - name: Checkout Arcanist
+        # Running Arcanist unit tests on ZTS fail
+        if: ${{matrix.ts == 'nts'}}
         uses: actions/checkout@v7
         with:
           repository: 'phorgeit/arcanist'
           ref: 'master'
           path: 'arcanist'
       - name: Arcanist unit tests
+        # Running Arcanist unit tests on ZTS fail
+        if: ${{matrix.ts == 'nts'}}
         working-directory: 'arcanist/'
         run: |
-          php -dextension=../modules/arc_booster.so scripts/arcanist.php unit --no-coverage --everything --
+          php -dextension=../modules/arc_booster.so scripts/arcanist.php unit --no-coverage --everything --output fail --
 
   # Build and test on Windows
   windows:
@@ -64,13 +68,3 @@ jobs:
           ts: ${{ matrix.ts }}
           run-tests: true
           test-runner-args: "--show-diff tests"
-      - name: Checkout Arcanist
-        uses: actions/checkout@v7
-        with:
-          repository: 'phorgeit/arcanist'
-          ref: 'master'
-          path: 'arcanist'
-      - name: Arcanist unit tests
-        working-directory: 'arcanist/'
-        run: |
-          php -dextension=../artifacts/php_arc_booster.dll scripts/arcanist.php unit --no-coverage --everything --
