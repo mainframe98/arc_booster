@@ -8,7 +8,7 @@
 extern zend_module_entry arc_booster_module_entry;
 #define phpext_arc_booster_ptr &arc_booster_module_entry
 
-#define PHP_ARC_BOOSTER_VERSION "1.0.0"
+#define PHP_ARC_BOOSTER_VERSION "1.0.1"
 
 #ifdef PHP_WIN32
 #	define PHP_ARC_BOOSTER_API __declspec(dllexport)
