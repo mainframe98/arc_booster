@@ -2198,8 +2198,8 @@ static zend_result arc_booster_utf8v(zval *array, zend_string *string, bool byte
 
 PHP_FUNCTION(ArcBooster_utf8v) {
 	zend_string *str = NULL;
-	zend_long byte_limit;
-	bool byte_limit_is_null;
+	zend_long byte_limit = -1;
+	bool byte_limit_is_null = true;
 
 	ZEND_PARSE_PARAMETERS_START(1, 2)
 		Z_PARAM_STR_OR_NULL(str)
